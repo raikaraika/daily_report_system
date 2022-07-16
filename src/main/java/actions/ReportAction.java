@@ -237,4 +237,29 @@ public class ReportAction extends ActionBase {
         }
     }
 
+    /**
+     * いいねする
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void react() throws ServletException, IOException{
+    	//idを条件に日報データを取得する
+		ReportView rv= service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+						service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+		//入力された日報内容を設定
+		rv.setReactionCount(rv.getReactionCount()+1);
+		putRequestScope(AttributeConst.EMP_NAME, AttributeConst.EMP_ID);
+
+		//日報データを更新
+		service.update(rv);
+
+		//フラッシュメッセージを設定
+		putSessionScope(AttributeConst.FLUSH, MessageConst.I_REACTED.getMessage());
+
+		//一覧画面にリダイレクト
+		redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
+
+    }
+
 }
