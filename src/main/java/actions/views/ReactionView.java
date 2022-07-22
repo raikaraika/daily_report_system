@@ -1,6 +1,5 @@
 package actions.views;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import lombok.AllArgsConstructor;
@@ -9,39 +8,29 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 /**
- * 日報情報について画面の入力値・出力値を扱うViewモデル
+ * いいね情報を扱うViewモデル
  *
  */
 @Getter //全てのクラスフィールドについてgetterを自動生成する(Lombok)
 @Setter //全てのクラスフィールドについてsetterを自動生成する(Lombok)
 @NoArgsConstructor //引数なしコンストラクタを自動生成する(Lombok)
 @AllArgsConstructor //全てのクラスフィールドを引数にもつ引数ありコンストラクタを自動生成する(Lombok)
-public class ReportView {
 
-    /**
+public class ReactionView {
+	 /**
      * id
      */
     private Integer id;
 
     /**
-     * 日報を登録した従業員
+     * いいねした従業員のid
      */
     private EmployeeView employee;
 
     /**
-     * いつの日報かを示す日付
+     * いいねされた日報ID
      */
-    private LocalDate reportDate;
-
-    /**
-     * 日報のタイトル
-     */
-    private String title;
-
-    /**
-     * 日報の内容
-     */
-    private String content;
+    private ReportView report;
 
     /**
      * 登録日時
@@ -53,8 +42,4 @@ public class ReportView {
      */
     private LocalDateTime updatedAt;
 
-    /**
-     * いいね数
-     */
-    private Integer reactionsCount;
 }

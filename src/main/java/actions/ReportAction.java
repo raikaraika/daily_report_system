@@ -7,11 +7,13 @@ import java.util.List;
 import javax.servlet.ServletException;
 
 import actions.views.EmployeeView;
+import actions.views.ReactionView;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.ReactionService;
 import services.ReportService;
 
 /**
@@ -21,6 +23,7 @@ import services.ReportService;
 public class ReportAction extends ActionBase {
 
     private ReportService service;
+    private ReactionService svc;
 
     /**
      * メソッドを実行する
@@ -29,10 +32,12 @@ public class ReportAction extends ActionBase {
     public void process() throws ServletException, IOException {
 
         service = new ReportService();
+        svc = new ReactionService();
 
         //メソッドを実行
         invoke();
         service.close();
+        svc.close();
     }
 
     /**
@@ -245,14 +250,26 @@ public class ReportAction extends ActionBase {
     public void react() throws ServletException, IOException{
     	//idを条件に日報データを取得する
 		ReportView rv= service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
-						service.findOne(toNumber(getRequestParam(AttributeConst.EMP_ID)));
+
+		//セッションからログイン中の従業員情報を取得
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+
+		//パラメータの値をもとにいいね情報のインスタンスを作成する
+		ReactionView rav = new ReactionView(
+                null,
+                ev,
+                rv,
+                null,
+                null);
 
 		//入力された日報内容を設定
-		rv.setReactionCount(rv.getReactionCount()+1);
-		putRequestScope(AttributeConst.EMP_NAME, AttributeConst.EMP_ID);
+		rv.setReactionsCount(rv.getReactionsCount()+1);
 
 		//日報データを更新
 		service.update(rv);
+
+		//いいね情報登録
+		svc.create(rav);
 
 		//フラッシュメッセージを設定
 		putSessionScope(AttributeConst.FLUSH, MessageConst.I_REACTED.getMessage());

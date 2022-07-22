@@ -97,7 +97,7 @@ public class Report {
     /**
      * いいね数
      */
-    @Column(name = JpaConst.REP_COL_REACTION_COUNT, nullable = false)
-    private Integer reactionCount;
+    @Column(name = JpaConst.REP_COL_REACTIONS_COUNT, nullable = false)
+    private Integer reactionsCount;
 
 }

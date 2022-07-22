@@ -6,7 +6,7 @@
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
-<c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -15,33 +15,29 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-        <h2>日報　一覧</h2>
-        <table id="report_list">
+        <h2>いいねした人　一覧</h2>
+        <table id="reaction_list">
             <tbody>
                 <tr>
-                    <th class="report_name">氏名</th>
-                    <th class="report_date">日付</th>
-                    <th class="report_title">タイトル</th>
-                    <th class="report_reactionsCount">いいね数</th>
-                    <th class="report_action">操作</th>
+                    <th class="reaction_name">氏名</th>
+                    <th class="reaction_date">日付</th>
+                    <th class="reaction_action">操作</th>
                 </tr>
-                <c:forEach var="report" items="${reports}" varStatus="status">
-                    <fmt:parseDate value="${report.reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
+                <c:forEach var="reaction" items="${reactions}" varStatus="status">
+                    <fmt:parseDate value="${reaction.createdAt}" pattern="yyyy-MM-dd" var="reactionDay" type="date" />
 
                     <tr class="row${status.count % 2}">
-                        <td class="report_name"><c:out value="${report.employee.name}" /></td>
-                        <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
-                        <td class="report_title">${report.title}</td>
-                        <td class="report_reactionsCount">${report.reactionsCount}</td>
-                        <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
+                        <td class="reaction_name"><c:out value="${reaction.employee.name}" /></td>
+                        <td class="reaction_date"><fmt:formatDate value='${reactionDay}' pattern='yyyy-MM-dd' /></td>
+                        <td class="reaction_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${employee.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
             </tbody>
         </table>
 
         <div id="pagination">
-            （全 ${reports_count} 件）<br />
-            <c:forEach var="i" begin="1" end="${((reports_count - 1) / maxRow) + 1}" step="1">
+            （全 ${reactions_count} 件）<br />
+            <c:forEach var="i" begin="1" end="${((reactions_count - 1) / maxRow) + 1}" step="1">
                 <c:choose>
                     <c:when test="${i == page}">
                         <c:out value="${i}" />&nbsp;
@@ -52,7 +48,8 @@
                 </c:choose>
             </c:forEach>
         </div>
-        <p><a href="<c:url value='?action=${actRep}&command=${commNew}' />">新規日報の登録</a></p>
+        <p><a href="<c:url value='?action=${actRep}&command=${commShow}' />">日報詳細に戻る</a></p>
+        <p><a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a></p>
 
     </c:param>
 </c:import>

@@ -40,7 +40,7 @@
                 </tr>
                 <tr>
                     <th>いいね数</th>
-                    <td><pre><c:out value="${report.reactionCount}" /></pre></td>
+                    <td><pre><c:out value="${report.reactionsCount}" /></pre></td>
                 </tr>
             </tbody>
         </table>

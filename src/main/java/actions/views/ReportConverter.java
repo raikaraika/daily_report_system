@@ -25,7 +25,7 @@ public class ReportConverter {
                 rv.getContent(),
                 rv.getCreatedAt(),
                 rv.getUpdatedAt(),
-        		rv.getReactionCount());
+        		rv.getReactionsCount());
     }
 
     /**
@@ -47,7 +47,7 @@ public class ReportConverter {
                 r.getContent(),
                 r.getCreatedAt(),
                 r.getUpdatedAt(),
-        		r.getReactionCount());
+        		r.getReactionsCount());
     }
 
     /**
@@ -78,7 +78,7 @@ public class ReportConverter {
         r.setContent(rv.getContent());
         r.setCreatedAt(rv.getCreatedAt());
         r.setUpdatedAt(rv.getUpdatedAt());
-        r.setReactionCount(rv.getReactionCount());
+        r.setReactionsCount(rv.getReactionsCount());
 
     }
 

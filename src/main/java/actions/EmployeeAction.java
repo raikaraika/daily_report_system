@@ -270,8 +270,7 @@ public class EmployeeAction extends ActionBase {
      * @throws IOException
      */
     private boolean checkAdmin() throws ServletException, IOException {
-
-        //セッションからログイン中の従業員情報を取得
+    	//セッションからログイン中の従業員情報を取得
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
         //管理者でなければエラー画面を表示
@@ -284,6 +283,7 @@ public class EmployeeAction extends ActionBase {
 
             return true;
         }
+
 
     }
 
