@@ -58,7 +58,7 @@ public interface JpaConst {
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
-    //String JPQL_PARM_REPORT = "report";//日報
+    String JPQL_PARM_REPORT = "report";//日報
 
     //NamedQueryの nameとquery
     //全ての従業員をidの降順に取得する
@@ -87,11 +87,11 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
     //指定した日報のいいね全件idの降順で取得する
-    //String Q_REA_GET_ALL = ENTITY_REA + ".getAll";
-    //String Q_REA_GET_ALL_DEF="SELECT g FROM Reaction AS g WHERE g.Report = :" + REP_COL_ID + " ORDER BY g.id DESC";
+    String Q_REA_GET_ALL = ENTITY_REA + ".getAll";
+    String Q_REA_GET_ALL_DEF="SELECT g FROM Reaction AS g WHERE g.report = :" + JPQL_PARM_REPORT + " ORDER BY g.id DESC";
     //指定した日報のいいねの件数を取得する
-    //String Q_REA_COUNT = ENTITY_REA + ".count";
-    //String Q_REA_COUNT_DEF ="SELECT COUNT(g) FROM Reaction AS g WHERE g.Report = :" + REP_COL_ID;
+    String Q_REA_COUNT = ENTITY_REA + ".countAll";
+    String Q_REA_COUNT_DEF ="SELECT COUNT(g) FROM Reaction AS g WHERE g.report = :" + JPQL_PARM_REPORT;
     //指定した従業員が作成したいいねを全件idの降順で取得する
     //String Q_REA_GET_ALL_MINE = ENTITY_REA + ".getAllMine";
     //String Q_REA_GET_ALL_MINE_DEF = "SELECT g FROM Reaction AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY g.id DESC";

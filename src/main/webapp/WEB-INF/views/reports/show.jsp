@@ -8,6 +8,8 @@
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
 <c:set var="commRea" value="${ForwardConst.CMD_REACT.getValue()}"/>
 
+<c:set var="commReaIdx" value="${ForwardConst.CMD_REAIDX.getValue()}" />
+
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
 
@@ -40,7 +42,13 @@
                 </tr>
                 <tr>
                     <th>いいね数</th>
-                    <td><pre><c:out value="${report.reactionsCount}" /></pre></td>
+                    <td>
+					<c:choose>
+								<c:when test="${report.reactionsCount != 0}">
+								<a href="<c:url value='?action=${actRep}&command=${commReaIdx}&id=${report.id }'/>">${report.reactionsCount}</a>
+								</c:when>
+								<c:otherwise>${report.reactionsCount}</c:otherwise>
+					</c:choose></td>
                 </tr>
             </tbody>
         </table>

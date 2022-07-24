@@ -7,6 +7,7 @@
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 <c:set var="commNew" value="${ForwardConst.CMD_NEW.getValue()}" />
+<c:set var="commReaIdx" value="${ForwardConst.CMD_REAIDX.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -32,7 +33,13 @@
                         <td class="report_name"><c:out value="${report.employee.name}" /></td>
                         <td class="report_date"><fmt:formatDate value='${reportDay}' pattern='yyyy-MM-dd' /></td>
                         <td class="report_title">${report.title}</td>
-                        <td class="report_reactionsCount">${report.reactionsCount}</td>
+                        <td class="report_reactionsCount">
+                        	<c:choose>
+								<c:when test="${report.reactionsCount != 0}">
+								<a href="<c:url value='?action=${actRep}&command=${commReaIdx}&id=${report.id }'/>">${report.reactionsCount}</a>
+								</c:when>
+								<c:otherwise>${report.reactionsCount}</c:otherwise>
+							</c:choose></td>
                         <td class="report_action"><a href="<c:url value='?action=${actRep}&command=${commShow}&id=${report.id}' />">詳細を見る</a></td>
                     </tr>
                 </c:forEach>
