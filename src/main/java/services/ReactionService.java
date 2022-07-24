@@ -3,6 +3,8 @@ package services;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import actions.views.EmployeeConverter;
+import actions.views.EmployeeView;
 import actions.views.ReactionConverter;
 import actions.views.ReactionView;
 import actions.views.ReportConverter;
@@ -42,10 +44,32 @@ public class ReactionService extends ServiceBase {
         return reactions_count;
     }
 
+    /**
+     * 指定した従業員がいいねしたかを判定
+     * @param reaction
+     * @param employee
+     * @param report
+     * @return いいねデータのture/false
+     */
+    public boolean countMineReaction(EmployeeView employee, ReportView report) {
+
+    	long countMine = (long) em.createNamedQuery(JpaConst.Q_REA_COUNT_MINE, Long.class)
+                .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, EmployeeConverter.toModel(employee))
+                .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
+                .getSingleResult();
+
+        if (countMine == 0) {
+            return false;
+
+        } else {
+            return true;
+        }
+    }
+
 
 	/**
 	 * いいねするリンクを押下でデータを1件作成し、いいねテーブルに登録
-	 * @param rav 日報の登録内容
+	 * @param rav いいねの登録内容
 	 */
 	public void create(ReactionView rav){
 			LocalDateTime ldt = LocalDateTime.now();

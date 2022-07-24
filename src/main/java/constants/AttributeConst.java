@@ -52,7 +52,8 @@ public enum AttributeConst {
 	REACTION("reaction"),
 	REACTIONS("reactions"),
 	REACTIONS_COUNT("reactions_count"),
-	REACTION_ID("id");
+	REACTION_ID("id"),
+	CAN_REACTION("can_reaction");
 
     private final String text;
     private final Integer i;

@@ -92,9 +92,9 @@ public interface JpaConst {
     //指定した日報のいいねの件数を取得する
     String Q_REA_COUNT = ENTITY_REA + ".countAll";
     String Q_REA_COUNT_DEF ="SELECT COUNT(g) FROM Reaction AS g WHERE g.report = :" + JPQL_PARM_REPORT;
-    //指定した従業員が作成したいいねを全件idの降順で取得する
-    //String Q_REA_GET_ALL_MINE = ENTITY_REA + ".getAllMine";
-    //String Q_REA_GET_ALL_MINE_DEF = "SELECT g FROM Reaction AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE + " ORDER BY g.id DESC";
+    //指定した従業員がいいねした日報を取得する
+    String Q_REA_COUNT_MINE = ENTITY_REA + ".countMine";
+    String Q_REA_COUNT_MINE_DEF = "SELECT COUNT(g) FROM Reaction AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE +" AND g.report = :" + JPQL_PARM_REPORT;
     //指定した従業員が作成したいいねの件数を取得する
     //String Q_REA_COUNT_ALL_MINE = ENTITY_REA + ".countAllMine";
     //String Q_REA_COUNT_ALL_MINE_DEF = "SELECT COUNT(g) FROM Reaction AS g WHERE g.employee = :" + JPQL_PARM_EMPLOYEE;

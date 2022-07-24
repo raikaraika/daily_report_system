@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst"%>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
 <c:set var="commRea" value="${ForwardConst.CMD_REACT.getValue()}"/>
-
 <c:set var="commReaIdx" value="${ForwardConst.CMD_REAIDX.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -61,11 +61,14 @@
             	</p>
         	</c:when>
 
-        	<c:otherwise>
-
-            	<p>
+        	<c:when test="${can_reaction == false}">
+        		<p>
                 	<a href="<c:url value='?action=${actRep}&command=${commRea}&id=${report.id}' />">この日報にいいねする</a>
             	</p>
+        	</c:when>
+
+        	<c:otherwise>
+
         	</c:otherwise>
         </c:choose>
 
